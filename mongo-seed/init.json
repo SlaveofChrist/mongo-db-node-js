@@ -1,0 +1,28 @@
+[{
+  "title": "Comprendre MongoDB avec Mongoose",
+  "author": {
+    "id": "60f7cbb57b9f2c1a0c123456",
+    "name": "Alice Martin"
+  },
+  "content": "Dans cet article, nous allons explorer comment Mongoose facilite les interactions avec MongoDB...",
+  "summary": "Introduction à MongoDB et Mongoose pour les débutants.",
+  "category": "Base de données",
+  "createdAt": "2025-06-24T10:00:00Z",
+  "updatedAt": "2025-06-24T10:30:00Z",
+  "comments": [
+    {
+      "userId": "60f7cbb57b9f2c1a0c654321",
+      "name": "Jean Dupont",
+      "comment": "Très bon article, merci !",
+      "createdAt": "2025-06-24T11:00:00Z"
+    },
+    {
+      "userId": "60f7cbb57b9f2c1a0c777777",
+      "name": "Claire Moreau",
+      "comment": "Tu pourrais aussi parler des modèles virtuels.",
+      "createdAt": "2025-06-24T11:45:00Z"
+    }
+  ],
+  "likes": 12,
+  "status": "published"
+}]
