@@ -6,17 +6,19 @@ services:
     image: mongo
     restart: always
     ports:
-      - "27017:27017"
+      - 27017:27017
     volumes:
       - ./mongo-seed/init.json:/docker-entrypoint-initdb.d/init.json:ro
     environment:
         MONGO_INITDB_DATABASE: mydatabase
+
   mongo_seed:
     build: ./mongo-seed
     # etablish connection to another service
     links:
       - mongo_db
-  server:
+
+  server-nodejs:
     image: nodejs
     volumes:
       - .:/server
@@ -24,7 +26,7 @@ services:
     build: .
     restart: always
     ports:
-      - 8000:8000
+      - 8001:8000
     environment:
       - MONGODB_URL=mongodb://mongo_db:27017/mydatabase
       - PORT=8000
@@ -32,3 +34,14 @@ services:
     depends_on:
       - mongo_db
     command: node server.js
+
+  react:
+    build: ./my-app
+    ports:
+      - 5173:5173
+    volumes:
+      - ./my-app:/app
+      - /app/node_modules
+    depends_on:
+      - server-nodejs
+    command: npm run dev -- --host 0.0.0.0 --port 5173
