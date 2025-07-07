@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require("dotenv");
 const Post = require('./model/post')
+const cors = require("cors");
 const express = require("express");
 dotenv.config();
 
@@ -17,16 +18,7 @@ async function main() {
     console.log('Connected to mongo server.');
 }
 
-/**
- * @description Get All users
- * @route GET /utilisateurs
- * /post:
- *   get:
- *     summary: Returns all posts
- *     responses:
- *       200:
- *         description: A successful response
- */
+
 const getAllPosts = (
     async function (req, res, next) {
         try {
@@ -38,13 +30,26 @@ const getAllPosts = (
         }
     }
 )
+
+const postRouter = express.Router();
+
+postRouter.route("/").get(getAllPosts)
+
 const app = express();
+
+const corsOptions = {
+  origin: process.env.FRONT_URL,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello World')
 })
 
+app.use("/posts", postRouter);
 module.exports = app;
 
 
