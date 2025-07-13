@@ -20,14 +20,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Start Docker environment
-        run: docker-compose up -d
+        run: docker compose up -d
       - name: npm ci and test
         run: |
           npm ci
           npm test
       - name: Stop Docker environment
         if: always()
-        run: docker-compose down
+        run: docker compose down
 
   deploy_vercel:
     runs-on: ubuntu-latest
